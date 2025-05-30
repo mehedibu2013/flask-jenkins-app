@@ -1,30 +1,25 @@
 pipeline {
     agent any
     stages {
-        stage('Clone') {
-            steps {
-                git 'https://github.com/mehedibu2013/flask-jenkins-app.git'
-            }
-        }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t flask-jenkins-app .'
+                bat 'docker build -t flask-jenkins-app .'
             }
         }
         stage('Run Docker Container') {
             steps {
-                sh 'docker stop flask-app || true'
-                sh 'docker rm flask-app || true'
-                sh 'docker run -d -p 5000:5000 --name flask-app flask-jenkins-app'
+                bat 'docker stop flask-app || exit /b 0'
+                bat 'docker rm flask-app || exit /b 0'
+                bat 'docker run -d -p 5000:5000 --name flask-app flask-jenkins-app'
             }
         }
     }
     post {
         success {
-            echo 'Flask app deployed successfully!'
+            echo 'Flask app deployed successfully! Access it at http://localhost:5000'
         }
         failure {
-            echo 'Deployment failed!'
+            echo 'Deployment failed! Check the console output for details.'
         }
     }
 }
