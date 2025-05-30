@@ -75,6 +75,7 @@ This project ignores the `.venv/` directory to keep the repo clean.
 
 ## 🧪 To Do (Optional Enhancements)
 
+* Add GitHub webhook for auto-trigger on push (Install & run ngrok to expose Jenkins (localhost:5000))
 * Add unit tests with pytest
 * Push image to AWS ECR or DockerHub
 * Deploy to ECS, EKS, or EC2 via SSH in Jenkins
